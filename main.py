@@ -117,7 +117,7 @@ if __name__=='__main__':
         except:
             os.system("cls")
             print('ERROR: Por favor ingrese un número de acuerdo a las opciones mostradas ...')
-        #Check what choice was entered and act accordingly
+        #De acuerdo a la elección ingresada se va a ejecutar una de las funciones.
         if opcion == 1:
            opcion_1()
         elif opcion == 2:
