@@ -1,5 +1,7 @@
 import os
 from datetime import datetime #Sirve para que nos dé la fecha y hora
+from rich.console import Console
+from rich.table import Table
 os.system("cls") #Sirve para limpiar la pantalla
 
 #Todas las variables que debe tener el material
@@ -20,11 +22,22 @@ MODALIDADES = ("Básica regular", "Básica alternativa", "Básica especial")
 NIVELES = ("Inicial", "Primaria", "Secundaria", "Otros")
 GRADOS = ("1ro", "2do", "3ro", "4to", "5to", "6to", "Otros")
 IDIOMAS = ("Castellano", "Quechua", "Aymara", "Inglés", "Otros")
-CURSOS = ("Comunicación", "Matemáticas", "Ciencias", "Inglés")
+CURSOS = ("Comunicación", "Matemáticas", "Ciencias", "Inglés", "Otros")
 TIPOS_DE_ARCHIVO = ("PDF", "Word", "Excel", "PPT", "Video")
 
-#Lista que va a contener todos los materiales creados (los materiales son diccionarios)
-matriz_materiales = []
+#Matriz que va a contener todos los materiales creados, llené el material con data de ejemplo
+matriz_materiales = [
+    ["Matemáticas para Principiantes", "Matemáticas", "John Doe", "2022", "Básica regular", "Primaria", "4to", "Castellano", "PDF", "1", "19/07/2023 10:30"],
+    ["Ciencias Naturales Avanzadas", "Ciencias", "Jane Smith", "2021", "Básica especial", "Secundaria", "2do", "Inglés", "Word", "2", "19/07/2023 11:45"],
+    ["Aprender a Programar con Python", "Otros", "Albert Einstein", "2023", "Básica alternativa", "Otros", "Otros", "Aymara", "Video", "3", "19/07/2023 14:20"],
+    ["Introducción a la Literatura", "Comunicación", "Emily Dickinson", "2023", "Básica regular", "Secundaria", "3ro", "Quechua", "PDF", "4", "19/07/2023 16:05"],
+    ["Historia Universal", "Otros", "William Shakespeare", "2022", "Básica especial", "Primaria", "6to", "Castellano", "PPT", "5", "19/07/2023 18:15"],
+    ["Inglés Intermedio", "Inglés", "Michael Johnson", "2023", "Básica regular", "Secundaria", "4to", "Inglés", "PDF", "6", "20/07/2023 09:00"],
+    ["Arte y Creatividad", "Otros", "Pablo Picasso", "2023", "Básica especial", "Primaria", "5to", "Castellano", "Word", "7", "20/07/2023 11:30"],
+    ["Geometría Avanzada", "Matemáticas", "Alberto García", "2022", "Básica regular", "Secundaria", "3ro", "Castellano", "Video", "8", "20/07/2023 14:15"],
+    ["Biología para Todos", "Ciencias", "Marie Curie", "2023", "Básica alternativa", "Otros", "Otros", "Castellano", "PDF", "9", "20/07/2023 16:40"],
+    ["Introducción a la Filosofía", "Otros", "Socrates", "2022", "Básica especial", "Secundaria", "1ro", "Castellano", "PPT", "10", "20/07/2023 19:00"],
+]
 
 #Definiendo las opciones que va a tener el menú principal
 opciones_de_menu = {
@@ -94,34 +107,38 @@ def opcion_1():
      if len(matriz_materiales) == 0:
          id_material = 1
      else:
-         id_material = matriz_materiales[-1][9] + 1 
+         id_material = int(matriz_materiales[-1][9]) + 1 
      #Esta línea es para conseguir el día y la hora actual
      fecha_y_hora_subida = datetime.now().strftime("%d/%m/%Y %H:%M")
      #El material se añade a la matriz
      matriz_materiales.append([
-         titulo,
+         titulo.title(), #El .title() es para que la primera letra de cada palabra esté con mayúscula
          curso,
-         autor,
-         anio,
+         autor.title(),
+         str(anio),
          modalidad,
          nivel,
          grado,
          idioma,
          tipo_de_archivo,
-         id_material,
+         str(id_material),
          fecha_y_hora_subida
      ])
      os.system("cls")
      print("Se añadió el material con éxito.")
 
 #Definiendo la función para la opción 2 (Visualización de materiales)
-def opcion_2():
+def opcion_2(matriz):
      os.system("cls")
-     print('==============================================')
-     print('\tVISUALIZACIÓN DE MATERIALES')
-     print('==============================================')
-     print(matriz_materiales)
-
+     console = Console()
+     tabla = Table(title="VISUALIZACIÓN DE TODOS LOS MATERIALES")
+     columnas = ["Título", "Curso", "Autor", "Año", "Modalidad", "Nivel", "Grado", "Idioma", "Tipo de archivo", "ID", "Fecha y hora de subida"]
+     for columna in columnas:
+         tabla.add_column(columna)
+     for fila in matriz:
+         tabla.add_row(*fila)
+     console.print(tabla)
+     
 #Definiendo la función para la opción 3 (Edición de materiales)
 def opcion_3():
      os.system("cls")
@@ -143,7 +160,7 @@ if __name__=='__main__':
         if opcion == 1:
            opcion_1()
         elif opcion == 2:
-            opcion_2()
+            opcion_2(matriz_materiales)
         elif opcion == 3:
             opcion_3()
         elif opcion == 4:
