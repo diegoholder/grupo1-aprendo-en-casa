@@ -1,4 +1,5 @@
 import os
+from datetime import datetime #Sirve para que nos dé la fecha y hora
 os.system("cls") #Sirve para limpiar la pantalla
 
 #Todas las variables que debe tener el material
@@ -10,6 +11,9 @@ modalidad = ""
 nivel = ""
 grado = ""
 idioma = ""
+tipo_de_archivo = ""
+id_material = 0
+fecha_y_hora_subida = ""
 
 #Tuplas para las variables que van a tener valores predefinidos
 MODALIDADES = ("Básica regular", "Básica alternativa", "Básica especial")
@@ -17,9 +21,10 @@ NIVELES = ("Inicial", "Primaria", "Secundaria", "Otros")
 GRADOS = ("1ro", "2do", "3ro", "4to", "5to", "6to", "Otros")
 IDIOMAS = ("Castellano", "Quechua", "Aymara", "Inglés", "Otros")
 CURSOS = ("Comunicación", "Matemáticas", "Ciencias", "Inglés")
+TIPOS_DE_ARCHIVO = ("PDF", "Word", "Excel", "PPT", "Video")
 
 #Lista que va a contener todos los materiales creados (los materiales son diccionarios)
-lista_materiales = []
+matriz_materiales = []
 
 #Definiendo las opciones que va a tener el menú principal
 opciones_de_menu = {
@@ -79,7 +84,21 @@ def opcion_1():
          print("{} -- {}".format(indice, i))
      idioma = IDIOMAS[int(input('Seleccione el idioma del material:\n'))-1]
      os.system("cls")
-     lista_materiales.append([
+     print('TIPOS DE ARCHIVO:')
+     for i in TIPOS_DE_ARCHIVO:
+         indice = TIPOS_DE_ARCHIVO.index(i)+1
+         print("{} -- {}".format(indice, i))
+     tipo_de_archivo = TIPOS_DE_ARCHIVO[int(input('Seleccione el tipo de archivo del material:\n'))-1]
+     os.system("cls")
+     #Este bloque de código sirve para darles un identificador que vaya aumentando de 1 en uno
+     if len(matriz_materiales) == 0:
+         id_material = 1
+     else:
+         id_material = matriz_materiales[-1][9] + 1 
+     #Esta línea es para conseguir el día y la hora actual
+     fecha_y_hora_subida = datetime.now().strftime("%d/%m/%Y %H:%M")
+     #El material se añade a la matriz
+     matriz_materiales.append([
          titulo,
          curso,
          autor,
@@ -88,6 +107,9 @@ def opcion_1():
          nivel,
          grado,
          idioma,
+         tipo_de_archivo,
+         id_material,
+         fecha_y_hora_subida
      ])
      os.system("cls")
      print("Se añadió el material con éxito.")
@@ -98,7 +120,7 @@ def opcion_2():
      print('==============================================')
      print('\tVISUALIZACIÓN DE MATERIALES')
      print('==============================================')
-     print(lista_materiales)
+     print(matriz_materiales)
 
 #Definiendo la función para la opción 3 (Edición de materiales)
 def opcion_3():
