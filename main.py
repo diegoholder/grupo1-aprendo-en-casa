@@ -79,16 +79,16 @@ def opcion_1():
          print("{} -- {}".format(indice, i))
      idioma = IDIOMAS[int(input('Seleccione el idioma del material:\n'))-1]
      os.system("cls")
-     lista_materiales.append({
-         "titulo": titulo,
-         "curso": curso,
-         "autor": autor,
-         "año": anio,
-         "modalidad": modalidad,
-         "nivel": nivel,
-         "grado": grado,
-         "idioma": idioma,
-     })
+     lista_materiales.append([
+         titulo,
+         curso,
+         autor,
+         anio,
+         modalidad,
+         nivel,
+         grado,
+         idioma,
+     ])
      os.system("cls")
      print("Se añadió el material con éxito.")
 
