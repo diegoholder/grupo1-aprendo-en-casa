@@ -160,12 +160,7 @@ def opcion_3():
 #Ejecución del programa, se llama a las opciones definidas arriba de acuerdo a la selección del usuario
 while(True):
     imprimir_menu()
-    opcion = ''
-    try:
-        opcion = int(input('Escriba su elección: '))
-    except:
-        os.system("cls")
-        print('ERROR: Por favor ingrese un número de acuerdo a las opciones mostradas ...')
+    opcion = int(input('Escriba su elección: '))
     #De acuerdo a la elección ingresada se va a ejecutar una de las funciones.
     if opcion == 1:
        opcion_1()
