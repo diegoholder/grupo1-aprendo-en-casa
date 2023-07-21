@@ -149,35 +149,34 @@ def opcion_3():
           print("Este es el material elegido:")
           for i in range(0, len(caracteristicas_del_material)):
               print("{}. {}: {}". format(i+1, caracteristicas_del_material[i], matriz_materiales[ID_elegido-1][i]))
-          caracteristica_a_editar = int(input("Elija una de las características a editar"))
+          caracteristica_a_editar = int(input("Elija una de las características a editar:\n"))
           if caracteristica_a_editar>len(caracteristicas_del_material)+1:
               print("La opción no es válida")
           else:
-              valor_a_editar = str(input("Indique el nuevo valor de la característica {}". format(caracteristicas_del_material [caracteristica_a_editar-1])))
+              valor_a_editar = str(input("Indique el nuevo valor de la característica '{}':\n". format(caracteristicas_del_material [caracteristica_a_editar-1])))
               matriz_materiales[ID_elegido-1][caracteristica_a_editar-1] = valor_a_editar
               print("¡¡El valor a sido editado con éxito!!")
     
 #Ejecución del programa, se llama a las opciones definidas arriba de acuerdo a la selección del usuario
-if __name__=='__main__':
-    while(True):
-        imprimir_menu()
-        opcion = ''
-        try:
-            opcion = int(input('Escriba su elección: '))
-        except:
-            os.system("cls")
-            print('ERROR: Por favor ingrese un número de acuerdo a las opciones mostradas ...')
-        #De acuerdo a la elección ingresada se va a ejecutar una de las funciones.
-        if opcion == 1:
-           opcion_1()
-        elif opcion == 2:
-            opcion_2(matriz_materiales)
-        elif opcion == 3:
-            opcion_3()
-        elif opcion == 4:
-            os.system("cls")
-            print('Gracias por utilizar nuestro programa. Hasta luego!')
-            exit()
-        else:
-            os.system("cls")
-            print('Opción inválida, por favor ingrese un número del 1 al 4.')
+while(True):
+    imprimir_menu()
+    opcion = ''
+    try:
+        opcion = int(input('Escriba su elección: '))
+    except:
+        os.system("cls")
+        print('ERROR: Por favor ingrese un número de acuerdo a las opciones mostradas ...')
+    #De acuerdo a la elección ingresada se va a ejecutar una de las funciones.
+    if opcion == 1:
+       opcion_1()
+    elif opcion == 2:
+        opcion_2(matriz_materiales)
+    elif opcion == 3:
+        opcion_3()
+    elif opcion == 4:
+        os.system("cls")
+        print('Gracias por utilizar nuestro programa. Hasta luego!')
+        exit()
+    else:
+        os.system("cls")
+        print('Opción inválida, por favor ingrese un número del 1 al 4.')
