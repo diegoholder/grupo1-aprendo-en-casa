@@ -4,7 +4,7 @@ from rich.console import Console
 from rich.table import Table
 os.system("cls") #Sirve para limpiar la pantalla
 
-#Todas las variables que debe tener el material
+#Definiendo las variables con las características que debe tener el material
 titulo = ""
 curso = ""
 autor = ""
@@ -155,7 +155,7 @@ def opcion_3():
           else:
               valor_a_editar = str(input("Indique el nuevo valor de la característica '{}':\n". format(caracteristicas_del_material [caracteristica_a_editar-1])))
               matriz_materiales[ID_elegido-1][caracteristica_a_editar-1] = valor_a_editar
-              print("¡¡El valor a sido editado con éxito!!")
+              print("¡¡El valor ha sido editado con éxito!!")
     
 #Ejecución del programa, se llama a las opciones definidas arriba de acuerdo a la selección del usuario
 while(True):
