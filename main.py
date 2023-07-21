@@ -64,9 +64,8 @@ def opcion_1():
      titulo = str(input('Ingrese el título del material:\n'))
      os.system("cls")
      print('CURSOS:')
-     for i in CURSOS:
-         indice = CURSOS.index(i)+1
-         print("{} -- {}".format(indice, i))
+     for i in range(0, len(CURSOS)):
+         print("{} -- {}".format(i+1, CURSOS[i]))
      curso = CURSOS[int(input('Seleccione el curso del material:\n'))-1]
      os.system("cls")
      autor = str(input('Ingrese el autor del material:\n'))
@@ -74,33 +73,28 @@ def opcion_1():
      anio = int(input('Ingrese el año del material:\n'))
      os.system("cls")
      print('MODALIDADES DE ESTUDIO:')
-     for i in MODALIDADES:
-         indice = MODALIDADES.index(i)+1
-         print("{} -- {}".format(indice, i))
+     for i in range(0, len(MODALIDADES)):
+         print("{} -- {}".format(i+1, MODALIDADES[i]))
      modalidad = MODALIDADES[int(input('Elija una de las modalidades mostradas arriba:\n'))-1]
      os.system("cls")
      print('NIVELES DE ESTUDIO:')
-     for i in NIVELES:
-         indice = NIVELES.index(i)+1
-         print("{} -- {}".format(indice, i))
+     for i in range(0, len(NIVELES)):
+         print("{} -- {}".format(i+1, NIVELES[i]))
      nivel = NIVELES[int(input('Elija uno de los niveles mostrados arriba:\n'))-1]
      os.system("cls")
      print('GRADOS:')
-     for i in GRADOS:
-         indice = GRADOS.index(i)+1
-         print("{} -- {}".format(indice, i))
+     for i in range(0, len(GRADOS)):
+         print("{} -- {}".format(i+1, GRADOS[i]))
      grado = GRADOS[int(input('Elija uno de los grados mostrados arriba:\n'))-1]
      os.system("cls")
      print('IDIOMAS:')
-     for i in IDIOMAS:
-         indice = IDIOMAS.index(i)+1
-         print("{} -- {}".format(indice, i))
+     for i in range(0, len(IDIOMAS)):
+         print("{} -- {}".format(i+1, IDIOMAS[i]))
      idioma = IDIOMAS[int(input('Seleccione el idioma del material:\n'))-1]
      os.system("cls")
      print('TIPOS DE ARCHIVO:')
-     for i in TIPOS_DE_ARCHIVO:
-         indice = TIPOS_DE_ARCHIVO.index(i)+1
-         print("{} -- {}".format(indice, i))
+     for i in range(0, len(TIPOS_DE_ARCHIVO)):
+         print("{} -- {}".format(i+1, TIPOS_DE_ARCHIVO[i]))
      tipo_de_archivo = TIPOS_DE_ARCHIVO[int(input('Seleccione el tipo de archivo del material:\n'))-1]
      os.system("cls")
      #Este bloque de código sirve para darles un identificador que vaya aumentando de 1 en uno
@@ -127,9 +121,10 @@ def opcion_1():
      os.system("cls")
      print("Se añadió el material con éxito.")
 
-#Definiendo la función para la opción 2 (Visualización de materiales)
+#Definiendo la función para la opción 2 (Visualización de materiales) rich
 def opcion_2(matriz):
      os.system("cls")
+     #El siguiente bloque de código es la sintaxis para llenar la tabla utilizando la librería 'Rich'
      console = Console()
      tabla = Table(title="VISUALIZACIÓN DE TODOS LOS MATERIALES")
      columnas = ["Título", "Curso", "Autor", "Año", "Modalidad", "Nivel", "Grado", "Idioma", "Tipo de archivo", "ID", "Fecha y hora de subida"]
@@ -145,7 +140,23 @@ def opcion_3():
      print('==============================================')
      print('\tEDICIÓN DE MATERIALES')
      print('==============================================')
+     caracteristicas_del_material = ("Título", "Curso", "Autor", "Año", "Modalidad", "Nivel", "Grado", "Idioma","Tipo de archivo", "ID")
 
+     ID_elegido = int(input("Escriba el ID del Material a Editar:\n"))
+     if ID_elegido>len(matriz_materiales):
+         print("El ID del material no existe")
+     else:
+          print("Este es el material elegido:")
+          for i in range(0, len(caracteristicas_del_material)):
+              print("{}. {}: {}". format(i+1, caracteristicas_del_material[i], matriz_materiales[ID_elegido-1][i]))
+          caracteristica_a_editar = int(input("Elija una de las características a editar"))
+          if caracteristica_a_editar>len(caracteristicas_del_material)+1:
+              print("La opción no es válida")
+          else:
+              valor_a_editar = str(input("Indique el nuevo valor de la característica {}". format(caracteristicas_del_material [caracteristica_a_editar-1])))
+              matriz_materiales[ID_elegido-1][caracteristica_a_editar-1] = valor_a_editar
+              print("¡¡El valor a sido editado con éxito!!")
+    
 #Ejecución del programa, se llama a las opciones definidas arriba de acuerdo a la selección del usuario
 if __name__=='__main__':
     while(True):
